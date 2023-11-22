@@ -30,8 +30,15 @@ print("productMaterial " + data. product_material )})
 task1>  db.task.find({id :"10"});
 
 // 7.Find only the product name and product material
-
-
+db.task.aggregate(
+  {
+      $group: {
+          _id: "$product_name",
+          productName: { $addToSet: "$product_material" },
+          TotalCount: { $sum: 1 }
+      }
+  }
+)
 
 // 8.Find all products which contain the value of soft in product material 
 
